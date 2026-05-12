@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)file:///Users/administrador/Downloads/index%20(2).html -->
-<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#2D5016">
     <title>Amaná · Registro Ferias</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="./Amaná · Registro Ferias_files/css2" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
         * {
             margin: 0;
@@ -29,7 +28,7 @@
         }
 
         body {
-            font-family: 'Work Sans', -apple-system, sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, var(--verde-menta) 0%, var(--blanco) 100%);
             min-height: 100vh;
             padding: 20px;
@@ -48,18 +47,16 @@
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 300;
-            letter-spacing: 3px;
-            color: var(--verde-bosque);
-            margin-bottom: 8px;
+            width: 180px;
+            height: auto;
+            margin: 0 auto 16px;
+            display: block;
         }
 
         .subtitle {
-            font-size: 13px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             color: var(--verde-medio);
             font-weight: 500;
         }
@@ -92,7 +89,7 @@
             border: 2px solid var(--verde-menta);
             border-radius: 8px;
             font-size: 16px;
-            font-family: 'Work Sans', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             transition: all 0.3s ease;
             background: var(--blanco);
             color: var(--verde-bosque);
@@ -123,13 +120,13 @@
             padding: 16px;
             border: none;
             border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Work Sans', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         .btn-primary {
@@ -243,7 +240,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">AMANÁ</div>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='40' viewBox='0 0 180 40'%3E%3Ctext x='50%25' y='50%25' font-family='Helvetica Neue,Helvetica' font-size='20' font-weight='200' letter-spacing='6' fill='%232D5016' text-anchor='middle' dominant-baseline='middle'%3EAMANÁ%3C/text%3E%3C/svg%3E" alt="Amaná" class="logo">
             <div class="subtitle">Registro Ferias</div>
         </div>
 
@@ -251,7 +248,7 @@
             <form id="ventaForm">
                 <div class="form-group">
                     <label for="sku">Pieza</label>
-                    <select id="sku" required="">
+                    <select id="sku" required>
                         <option value="">Seleccionar...</option>
                         <option value="AMA-001">Gargantilla Espera - $1,500,000</option>
                         <option value="AMA-002">Cadena Espera - $220,000</option>
@@ -272,7 +269,7 @@
 
                 <div class="form-group">
                     <label for="cantidad">Cantidad</label>
-                    <input type="number" id="cantidad" min="1" value="1" required="">
+                    <input type="number" id="cantidad" min="1" value="1" required>
                 </div>
 
                 <div class="form-group">
@@ -282,7 +279,7 @@
 
                 <div class="form-group">
                     <label for="medio">Medio de Pago</label>
-                    <select id="medio" required="">
+                    <select id="medio" required>
                         <option value="">Seleccionar...</option>
                         <option value="Efectivo">Efectivo</option>
                         <option value="Tarjeta">Tarjeta</option>
@@ -309,8 +306,8 @@
     <script>
         let ventasHoy = 0;
         
-        // IMPORTANTE: Reemplaza esta URL con tu Google Apps Script Web App URL
-        const SCRIPT_URL = https://script.google.com/macros/s/AKfycbxfYri8U2giB_PxmWss7MSI24rp7ZVMpbH9MVQDkyohBW1DE10yW-b68e5S_shR_I9T/exec;
+        // URL del Google Apps Script - YA CONFIGURADA
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0bSNQ-erfsp1Gvu_4gn0eS4VzPwfvAGV8Ui-3FzsjomzUkxELA8-eo0vAYXJsQSiH/exec';
 
         const productos = {
             'AMA-001': { nombre: 'Gargantilla Espera', precio: 1500000, costo: 610000 },
@@ -420,5 +417,5 @@
             localStorage.setItem('ventasHoy', ventasHoy.toString());
         });
     </script>
-
-</body></html>
+</body>
+</html>
