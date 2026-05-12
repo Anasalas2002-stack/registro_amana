@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#2D5016">
+    <title>Amaná · Registro Ferias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --verde-bosque: #2D5016;
+            --verde-medio: #558B2F;
+            --verde-claro: #81C784;
+            --verde-menta: #E8F5E9;
+            --blanco: #FFFFFF;
+            --gris: #757575;
+            --gris-claro: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--verde-menta) 0%, var(--blanco) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--verde-bosque);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .logo {
+            width: 180px;
+            height: auto;
+            margin: 0 auto 16px;
+            display: block;
+        }
+
+        .subtitle {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--verde-medio);
+            font-weight: 500;
+        }
+
+        .form-card {
+            background: var(--blanco);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 24px rgba(45, 80, 22, 0.08);
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--verde-bosque);
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--verde-menta);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            transition: all 0.3s ease;
+            background: var(--blanco);
+            color: var(--verde-bosque);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--verde-medio);
+            box-shadow: 0 0 0 3px rgba(85, 139, 47, 0.1);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%232D5016' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--verde-bosque);
+            color: var(--blanco);
+            box-shadow: 0 4px 16px rgba(45, 80, 22, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(45, 80, 22, 0.2);
+        }
+
+        .btn-secondary {
+            background: var(--gris-claro);
+            color: var(--gris);
+        }
+
+        .btn-secondary:active {
+            background: #E0E0E0;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: var(--verde-bosque);
+            color: var(--blanco);
+            padding: 24px 32px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(45, 80, 22, 0.4);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .success-message.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--verde-medio);
+            color: var(--blanco);
+            padding: 12px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(85, 139, 47, 0.4);
+            animation: fadeIn 0.6s ease 0.4s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .loading {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--blanco);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='40' viewBox='0 0 180 40'%3E%3Ctext x='50%25' y='50%25' font-family='Helvetica Neue,Helvetica' font-size='20' font-weight='200' letter-spacing='6' fill='%232D5016' text-anchor='middle' dominant-baseline='middle'%3EAMANÁ%3C/text%3E%3C/svg%3E" alt="Amaná" class="logo">
+            <div class="subtitle">Registro Ferias</div>
+        </div>
+
+        <div class="form-card">
+            <form id="ventaForm">
+                <div class="form-group">
+                    <label for="sku">Pieza</label>
+                    <select id="sku" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="AMA-001">Gargantilla Espera - $1,500,000</option>
+                        <option value="AMA-002">Cadena Espera - $220,000</option>
+                        <option value="AMA-003">Topos Espera - $250,000</option>
+                        <option value="AMA-004">Anillo Alacrán - $450,000</option>
+                        <option value="AMA-005">Anillo Doble - $450,000</option>
+                        <option value="AMA-006">Anillo Trenzado - $480,000</option>
+                        <option value="AMA-007">Earcuff Espera - $350,000</option>
+                        <option value="AMA-008">Brazalete Espera - $920,000</option>
+                        <option value="AMA-009">Candongas Espera - $620,000</option>
+                        <option value="AMA-010">Aretes Esperanza - $350,000</option>
+                        <option value="AMA-011">Earcuff Esperanza - $320,000</option>
+                        <option value="AMA-012">Anillo Esperanza - $350,000</option>
+                        <option value="AMA-013">Collar Esperanza - $2,100,000</option>
+                        <option value="AMA-014">Brazalete Esperanza - $980,000</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" min="1" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cliente">Cliente (opcional)</label>
+                    <input type="text" id="cliente" placeholder="Nombre o email">
+                </div>
+
+                <div class="form-group">
+                    <label for="medio">Medio de Pago</label>
+                    <select id="medio" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta">Tarjeta</option>
+                        <option value="Bold">Bold</option>
+                        <option value="Transferencia">Transferencia</option>
+                    </select>
+                </div>
+
+                <div class="btn-container">
+                    <button type="button" class="btn btn-secondary" onclick="limpiarForm()">Limpiar</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="counter" id="counter">Hoy: 0 ventas</div>
+
+    <div class="success-message" id="successMessage">
+        <div class="success-icon">✓</div>
+        <div>Venta registrada</div>
+    </div>
+
+    <script>
+        let ventasHoy = 0;
+        
+        // URL del Google Apps Script - YA CONFIGURADA
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0bSNQ-erfsp1Gvu_4gn0eS4VzPwfvAGV8Ui-3FzsjomzUkxELA8-eo0vAYXJsQSiH/exec';
+
+        const productos = {
+            'AMA-001': { nombre: 'Gargantilla Espera', precio: 1500000, costo: 610000 },
+            'AMA-002': { nombre: 'Cadena Espera', precio: 220000, costo: 45500 },
+            'AMA-003': { nombre: 'Topos Espera', precio: 250000, costo: 32702 },
+            'AMA-004': { nombre: 'Anillo Alacrán', precio: 450000, costo: 137705 },
+            'AMA-005': { nombre: 'Anillo Doble', precio: 450000, costo: 189000 },
+            'AMA-006': { nombre: 'Anillo Trenzado', precio: 480000, costo: 141507 },
+            'AMA-007': { nombre: 'Earcuff Espera', precio: 350000, costo: 185200 },
+            'AMA-008': { nombre: 'Brazalete Espera', precio: 920000, costo: 440950 },
+            'AMA-009': { nombre: 'Candongas Espera', precio: 620000, costo: 221950 },
+            'AMA-010': { nombre: 'Aretes Esperanza', precio: 350000, costo: 138800 },
+            'AMA-011': { nombre: 'Earcuff Esperanza', precio: 320000, costo: 126200 },
+            'AMA-012': { nombre: 'Anillo Esperanza', precio: 350000, costo: 133400 },
+            'AMA-013': { nombre: 'Collar Esperanza', precio: 2100000, costo: 785400 },
+            'AMA-014': { nombre: 'Brazalete Esperanza', precio: 980000, costo: 369200 }
+        };
+
+        document.getElementById('ventaForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.classList.add('loading');
+            submitBtn.innerHTML = 'Guardando<span class="spinner"></span>';
+
+            const sku = document.getElementById('sku').value;
+            const cantidad = parseInt(document.getElementById('cantidad').value);
+            const cliente = document.getElementById('cliente').value || 'Cliente feria';
+            const medio = document.getElementById('medio').value;
+            
+            const producto = productos[sku];
+            const fecha = new Date().toISOString().split('T')[0];
+            const idVenta = 'F' + Date.now();
+
+            const venta = {
+                fecha: fecha,
+                idVenta: idVenta,
+                sku: sku,
+                nombrePieza: producto.nombre,
+                cliente: cliente,
+                cantidad: cantidad,
+                precioVenta: producto.precio,
+                canal: 'Feria',
+                medioPago: medio,
+                comision: medio === 'Efectivo' ? 'No' : 'Sí',
+                comisionCOP: medio === 'Efectivo' ? 0 : Math.round(producto.precio * cantidad * 0.047),
+                costoUnitario: producto.costo,
+                costoTotal: producto.costo * cantidad,
+                ingresoTotal: producto.precio * cantidad,
+                margenTotal: (producto.precio - producto.costo) * cantidad
+            };
+
+            try {
+                // Guardar en Google Sheets
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(venta)
+                });
+
+                mostrarExito();
+                ventasHoy++;
+                actualizarContador();
+                limpiarForm();
+            } catch (error) {
+                alert('Error al guardar. Revisa tu conexión.');
+            } finally {
+                submitBtn.classList.remove('loading');
+                submitBtn.innerHTML = 'Registrar';
+            }
+        });
+
+        function limpiarForm() {
+            document.getElementById('ventaForm').reset();
+            document.getElementById('cantidad').value = 1;
+        }
+
+        function mostrarExito() {
+            const msg = document.getElementById('successMessage');
+            msg.classList.add('show');
+            setTimeout(() => {
+                msg.classList.remove('show');
+            }, 1500);
+        }
+
+        function actualizarContador() {
+            document.getElementById('counter').textContent = `Hoy: ${ventasHoy} ventas`;
+        }
+
+        // Cargar contador del día
+        const hoy = new Date().toLocaleDateString();
+        const ventasGuardadas = localStorage.getItem('ventasHoy');
+        const fechaGuardada = localStorage.getItem('fechaVentas');
+        
+        if (fechaGuardada === hoy && ventasGuardadas) {
+            ventasHoy = parseInt(ventasGuardadas);
+            actualizarContador();
+        } else {
+            localStorage.setItem('fechaVentas', hoy);
+            localStorage.setItem('ventasHoy', '0');
+        }
+
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('ventasHoy', ventasHoy.toString());
+        });
+    </script>
+</body>
+</html>
